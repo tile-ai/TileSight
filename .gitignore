@@ -1,0 +1,87 @@
+# === Python cache / bytecode ===
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# === Compiled extensions ===
+*.so
+*.pyd
+*.dll
+
+# === Packaging / build ===
+*.egg-info/
+*.egg
+dist/
+build/
+.eggs/
+pip-wheel-metadata/
+*.whl
+
+# === Model / data artifacts ===
+*.onnx
+*.params
+*.npz
+*.pb
+*.pkl
+*.pkl_*
+*.pkl.gz
+*.tar.gz*
+*.h5
+*.ckpt
+*.pt
+*.weights
+.dataset
+temp/
+
+# === Jupyter / IPython ===
+.ipynb_checkpoints/
+.profile_default/
+.ipython/
+
+# === IDE / editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+
+# === OS-specific ===
+.DS_Store
+**/.DS_Store
+Thumbs.db
+
+# === Virtual environments ===
+.venv/
+venv/
+ENV/
+env/
+
+# === Logs ===
+# *.log
+*.out
+*.err
+/micro_benchmark/**/*.log
+**/.rocprofv3/
+
+# === Misc ===
+*.bak
+*.tmp
+
+# === Binary files ===
+*.out
+*.err
+run
+
+# Generated GPU calibration outputs.
+/micro_benchmark/results/
+/micro_benchmark/build/
+/micro_benchmark/reference_results/
+
+/case_study/persistent_cache_hit_rate/hit_rate_comparison.png
+/case_study/
+
+# Local documentation and generated validation outputs.
+/docs/
+/doc/
+/artifacts/
