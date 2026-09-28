@@ -40,6 +40,18 @@ python examples/fa3_fa4_schedule_modes.py
 python examples/flashmla_decode.py --num-splits 4
 ```
 
+## Model a TileLang kernel
+
+The [TileLang frontend](tilesight/tilelang/README.md) lowers a TileLang kernel once
+and translates the compiled schedule into a program; it needs TileLang 0.1.12 or
+0.1.14, no GPU.
+
+```bash
+python -m pip install tilelang==0.1.14
+python -m tilesight.tilelang examples/tilelang/kernels/gemm.py:build_kernel --target sm_90a \
+  --factory-args '{"m": 8192, "n": 8192, "k": 8192}' --output gemm.json --report-dir gemm-report
+```
+
 The [GPU measurement guide](micro_benchmark/README.md) covers NVIDIA SM and AMD
 gfx selection, DRAM concurrency scans and optional communication tests.
 
@@ -49,6 +61,7 @@ gfx selection, DRAM concurrency scans and optional communication tests.
 | --- | --- |
 | `tilesight/arch/` | GPU architecture profiles |
 | `tilesight/modeling/` | Program frontend, cost/cache models and scheduling |
+| `tilesight/tilelang/` | TileLang frontend: compiled TileLang kernels to programs |
 | `tilesight/util/` | Shared utilities |
 | `examples/` | Runnable modeling examples |
 | `micro_benchmark/` | CUDA/HIP probes and communication adapters |

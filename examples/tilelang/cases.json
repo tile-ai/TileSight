@@ -1,0 +1,114 @@
+{
+  "target_arch": "sm_90a",
+  "capture": {
+    "cache_control": "none",
+    "clock_control": "none",
+    "replay_mode": "application",
+    "warmup": 5,
+    "profile_from_start": "off"
+  },
+  "cases": {
+    "gemm": {
+      "file": "kernels/gemm.py",
+      "function": "build_kernel",
+      "factory_args": {
+        "m": 8192,
+        "n": 8192,
+        "k": 8192
+      },
+      "specialization": {
+        "block_m": 128,
+        "block_n": 128,
+        "block_k": 64,
+        "num_stages": 3
+      },
+      "pass_configs": {
+        "tl.disable_warp_specialized": true
+      },
+      "compile_flags": [
+        "-O3",
+        "-DENABLE_BF16"
+      ],
+      "bindings": {}
+    },
+    "gemm_pipelined": {
+      "file": "kernels/gemm_pipelined.py",
+      "function": "build_kernel",
+      "factory_args": {
+        "m": 8192,
+        "n": 8192,
+        "k": 8192
+      },
+      "specialization": {},
+      "pass_configs": {},
+      "compile_flags": null,
+      "bindings": {}
+    },
+    "gqa": {
+      "file": "kernels/gqa.py",
+      "function": "build_kernel",
+      "factory_args": {
+        "seq_len_q": 8192,
+        "seq_len_kv": 8192,
+        "batch": 1,
+        "heads": 16,
+        "heads_kv": 4,
+        "head_dim": 64,
+        "is_causal": false,
+        "sm_scale": 0.125,
+        "softcap": 0,
+        "dtype": "float16"
+      },
+      "specialization": {},
+      "pass_configs": {
+        "tl.enable_fast_math": true,
+        "tl.disable_thread_storage_sync": true
+      },
+      "compile_flags": [
+        "-O3",
+        "--use_fast_math",
+        "-Wno-deprecated-declarations",
+        "-U__CUDA_NO_HALF_OPERATORS__",
+        "-U__CUDA_NO_HALF_CONVERSIONS__",
+        "-U__CUDA_NO_HALF2_OPERATORS__",
+        "-U__CUDA_NO_BFLOAT16_CONVERSIONS__",
+        "--expt-relaxed-constexpr",
+        "--expt-extended-lambda",
+        "-DNDEBUG"
+      ],
+      "bindings": {
+        "seq_len_q": 8192,
+        "seq_len_kv": 8192
+      }
+    },
+    "gelu": {
+      "file": "kernels/gelu.py",
+      "function": "build_kernel",
+      "factory_args": {
+        "N_total": 67108864,
+        "threads": 128,
+        "num_per_thread": 16,
+        "dtype": "bfloat16"
+      },
+      "specialization": {},
+      "pass_configs": {},
+      "compile_flags": null,
+      "bindings": {}
+    },
+    "sum": {
+      "file": "kernels/sum.py",
+      "function": "build_kernel",
+      "factory_args": {
+        "M": 8192,
+        "N": 8192,
+        "block_m": 2,
+        "threads": 128,
+        "dtype": "float16"
+      },
+      "specialization": {},
+      "pass_configs": {},
+      "compile_flags": null,
+      "bindings": {}
+    }
+  }
+}
