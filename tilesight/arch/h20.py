@@ -6,6 +6,8 @@ class H20(Arch):
         
         # After calling the base class constructor, set the properties
         self.core = "H100"
+        self.support_wgmma = True
+        self.support_utcmma = False
         self.sm_count = 78
         self.base_freq = 1.98 * 1e9 # 1.83 * 1e9 #1.98 * 1e9
         self.max_freq = 1.98 * 1e9 # 1.83 * 1e9 #1.98 * 1e9
