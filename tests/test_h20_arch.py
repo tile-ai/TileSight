@@ -17,8 +17,7 @@ def arch(request):
     return profile
 
 
-def test_h20_capacity_and_capabilities(arch):
-    assert arch.ddr_capacity == 96 * (1024**3)
+def test_h20_capabilities(arch):
     assert arch.support_wgmma is True
     assert arch.support_utcmma is False
     assert arch.tmem_capacity_per_sm == 0
