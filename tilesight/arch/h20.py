@@ -6,6 +6,8 @@ class H20(Arch):
         
         # After calling the base class constructor, set the properties
         self.core = "H100"
+        self.support_wgmma = True
+        self.support_utcmma = False
         self.sm_count = 78
         self.base_freq = 1.98 * 1e9 # 1.83 * 1e9 #1.98 * 1e9
         self.max_freq = 1.98 * 1e9 # 1.83 * 1e9 #1.98 * 1e9
@@ -15,7 +17,7 @@ class H20(Arch):
         self.fp32_cores_per_sm = 128
         self.int32_cores_per_sm = 64
         self.ddr_bandwidth = 4000 *1e9
-        self.ddr_capacity = 141 * (1000**3)
+        self.ddr_capacity = 96 * (1024**3)  # Nominal HBM capacity in bytes.
         self.l2_bandwidth = 8123.448629e9 # 96* self.max_freq * 2 * 32 # no compression, 2 sectors/cycle?, 95???
         self.l2_capacity = 60 * (1024**2) # H100 with dup
         self.sm_sub_partitions = 4
@@ -100,7 +102,7 @@ class H20(Arch):
         self.fp32_cores_per_sm = 128
         self.int32_cores_per_sm = 64
         self.ddr_bandwidth = 4000 *1e9
-        self.ddr_capacity = 80 * (1024**3)
+        self.ddr_capacity = 96 * (1024**3)
         self.l2_bandwidth = 8123.448629e9 # 96* self.max_freq * 2 * 32 # no compression, 2 sectors/cycle?, 95???
         self.l2_capacity = 60 * (1024**2) # H100 with dup
         self.sm_sub_partitions = 4
